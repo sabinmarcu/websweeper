@@ -1,0 +1,1 @@
+docker run --rm -it --mount type=bind,source="%cd%",target=/app -p 8000:8000 minesweeper
