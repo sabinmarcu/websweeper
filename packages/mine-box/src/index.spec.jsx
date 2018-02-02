@@ -29,5 +29,8 @@ describe('Mine Box', () => {
       expect(wrapper).to.have.prop('onClick');
       expect(wrapper).to.have.prop('onClick').equal(missingClickHandler);
     });
+    it('should properly match snapshot', () => {
+      expect(wrapper).to.matchSnapshot();
+    });
   });
 });

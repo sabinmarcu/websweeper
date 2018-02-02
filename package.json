@@ -15,8 +15,10 @@
         "babel-jest": "^22.1.0",
         "chai": "^4.1.2",
         "chai-enzyme": "^1.0.0-beta.0",
+        "chai-jest-snapshot": "^2.0.0",
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
+        "enzyme-to-json": "^3.3.1",
         "eslint": "^4.9.0",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-import-resolver-node-extended": "^1.0.0",
@@ -36,7 +38,7 @@
         "react-test-renderer": "^16.2.0"
     },
     "scripts": {
-        "test": "jest --",
+        "test": "jest",
         "lint": "eslint packages/**/*.js packages/**/*.jsx",
         "bootstrap:lerna": "lerna-bootstrap",
         "bootstrap:flow": "flow-typed install",
