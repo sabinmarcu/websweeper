@@ -1,5 +1,6 @@
 // @flow
-/* global jasmine */
 
-require("babel-polyfill");
-require("livescript");
+import '@babel/polyfill';
+import 'livescript';
+import './chai';
+import './enzyme';

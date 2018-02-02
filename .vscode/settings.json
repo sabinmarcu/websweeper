@@ -1,0 +1,10 @@
+{
+    "vsicons.presets.angular": false,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "javascript.validate.enable": false,
+    "eslint.enable": true,
+    "jest.pathToConfig": "jest.config.js",
+    "jest.pathToJest": "npm test --"
+}
