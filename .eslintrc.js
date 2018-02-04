@@ -4,12 +4,12 @@ var path = require("path");
 module.exports = Object.assign({
     "parser": "babel-eslint",
     "extends": [
-        // "plugin:flowtype/recommended",
+        "plugin:flowtype/recommended",
         "plugin:monorepo/recommended",
         "airbnb",
     ],
     "plugins": [
-        // "flowtype",
+        "flowtype",
         "disable",
         "monorepo",
     ],

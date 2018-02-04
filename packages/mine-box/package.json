@@ -15,6 +15,7 @@
   },
   "peerDependencies": {
     "chai": "^4.1.2",
+    "debug": "^3.1.0",
     "enzyme": "^3.3.0",
     "enzyme-to-json": "^3.3.1"
   }

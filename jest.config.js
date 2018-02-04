@@ -2,6 +2,10 @@ module.exports = {
   verbose: true,
   moduleFileExtensions: ['js', 'ls', 'jsx'],
   testRegex: '(\\.|/)(spec)\\.(jsx?|ls)$',
+  // setupFiles: [
+  //   '<rootDir>/test/chai.js',
+  //   '<rootDir>/test/enzyme.js',
+  // ],
   setupTestFrameworkScriptFile: '<rootDir>/test/jest.js',
   testPathIgnorePatterns: [
     'node_modules',

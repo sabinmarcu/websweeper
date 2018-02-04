@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "gulp-debug": "^3.2.0",
         "lerna": "^2.7.1"
     },
     "dependencies": {
@@ -10,12 +11,16 @@
         "@babel/preset-react": "^7.0.0-beta.39",
         "@babel/preset-stage-0": "^7.0.0-beta.38",
         "@babel/register": "^7.0.0-beta.38",
+        "autoprefixer": "^7.2.5",
         "babel-core": "^7.0.0-0",
         "babel-eslint": "^8.2.1",
         "babel-jest": "^22.1.0",
+        "babel-loader": "^7.1.2",
         "chai": "^4.1.2",
         "chai-enzyme": "^1.0.0-beta.0",
         "chai-jest-snapshot": "^2.0.0",
+        "compression-webpack-plugin": "^1.1.6",
+        "debug": "^3.1.0",
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
         "enzyme-to-json": "^3.3.1",
@@ -28,17 +33,26 @@
         "eslint-plugin-jsx-a11y": "^6.0.2",
         "eslint-plugin-monorepo": "^0.2.0",
         "eslint-plugin-react": "^7.4.0",
+        "extract-text-webpack-plugin": "^3.0.2",
         "faker": "^4.1.0",
         "flow-bin": "^0.64.0",
         "flow-typed": "^2.3.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^7.0.1",
+        "gulp-flatten": "^0.4.0",
+        "gulp-watch": "^5.0.0",
+        "html-webpack-plugin": "^2.30.1",
         "jest": "^22.1.4",
         "livescript": "^1.5.0",
+        "mock-require": "^3.0.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "react-test-renderer": "^16.2.0"
+        "react-test-renderer": "^16.2.0",
+        "webpack": "^3.10.0"
     },
     "scripts": {
         "test": "jest",
+        "test:debug": "DEBUG=\"log|test\" npm test",
         "lint": "eslint packages/**/*.js packages/**/*.jsx",
         "bootstrap:lerna": "lerna-bootstrap",
         "bootstrap:flow": "flow-typed install",
