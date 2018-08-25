@@ -4,9 +4,14 @@
         "src/*/*"
     ],
     "devDependencies": {
+        "@storybook/react": "^3.4.10",
+        "glob-fs": "^0.1.7",
         "gulp-chug": "^0.5.1",
         "gulp-debug": "^3.2.0",
-        "lerna": "^2.7.1"
+        "lerna": "^2.7.1",
+        "react": "^16.4.2",
+        "react-dom": "^16.4.2",
+        "storybook-styled-components": "^1.1.1"
     },
     "dependencies": {
         "@babel/core": "7.0.0-beta.41",
@@ -39,6 +44,7 @@
         "lint": "eslint src/**/*.js src/**/*.jsx",
         "bootstrap:lerna": "lerna-bootstrap",
         "bootstrap:flow": "flow-typed install",
-        "bootstrap": "yarn run bootstrap:lerna && yarn run bootstrap:flow"
+        "bootstrap": "yarn run bootstrap:lerna && yarn run bootstrap:flow",
+        "storybook": "start-storybook -p 9000 -c .storybook"
     }
 }

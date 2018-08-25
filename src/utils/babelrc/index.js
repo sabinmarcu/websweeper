@@ -16,6 +16,7 @@ const generator = (useReact = false) =>
         }
 
         base.plugins = [
+            'styled-components',
             '@babel/plugin-proposal-decorators',
             ['@babel/plugin-proposal-class-properties', { loose: true }],
         ].concat(
