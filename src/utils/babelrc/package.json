@@ -1,0 +1,18 @@
+{
+  "name": "@websweeper/babel-preset",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "dependencies": {
+    "@babel/core": "7.0.0-beta.41",
+    "@babel/plugin-proposal-decorators": "7.0.0-beta.41",
+    "@babel/polyfill": "7.0.0-beta.41",
+    "@babel/register": "7.0.0-beta.41",
+    "@sabinmarcu/babel-preset": "^1.3.0",
+    "react-hot-loader": "^3.1.3"
+  }
+}

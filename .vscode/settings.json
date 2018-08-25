@@ -6,5 +6,15 @@
     "javascript.validate.enable": false,
     "eslint.enable": true,
     "jest.pathToConfig": "jest.config.js",
-    "jest.pathToJest": "npm test --"
+    "jest.pathToJest": "npm test --",
+    "eslint.packageManager": "yarn",
+    "eslint.workingDirectories": [
+        "./packages/b-auth-api-endpoints",
+        "./packages/b-auth-provider",
+        "./packages/b-cli",
+        "./packages/b-server",
+        "./packages/f-router"
+    ],"emmet.syntaxProfiles": {
+        "javascript": "jsx"
+    }
 }

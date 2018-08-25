@@ -1,0 +1,15 @@
+{
+  "name": "@websweeper/eslint-config-all",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "dependencies": {
+    "eslint": "^4.9.0",
+    "eslint-plugin-react": "^7.4.0",
+    "@sabinmarcu/eslint-config-all": "^1.2.0"
+  }
+}

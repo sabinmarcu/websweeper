@@ -1,6 +1,10 @@
 {
-  "name": "box",
-  "version": "1.0.0",
+  "name": "@websweeper/box",
+  "version": "1.0.2",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
   "description": "",
   "main": "lib/index.js",
   "module": "src/index.js",

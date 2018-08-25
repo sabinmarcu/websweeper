@@ -1,0 +1,19 @@
+{
+  "name": "@websweeper/init-script",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "dependencies": {
+    "@babel/core": "7.0.0-beta.41",
+    "@babel/polyfill": "7.0.0-beta.41",
+    "@babel/register": "7.0.0-beta.41",
+    "@websweeper/babel-preset": "^1.0.0",
+    "@websweeper/webpack": "^1.0.0",
+    "debug": "^3.1.0",
+    "require-middleware": "^1.0.0"
+  }
+}
