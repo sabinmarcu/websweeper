@@ -5,6 +5,7 @@
     ],
     "devDependencies": {
         "@storybook/react": "^3.4.10",
+        "@storybook/storybook-deployer": "^2.3.0",
         "glob-fs": "^0.1.7",
         "gulp-chug": "^0.5.1",
         "gulp-debug": "^3.2.0",
@@ -45,6 +46,7 @@
         "bootstrap:lerna": "lerna-bootstrap",
         "bootstrap:flow": "flow-typed install",
         "bootstrap": "yarn run bootstrap:lerna && yarn run bootstrap:flow",
-        "storybook": "start-storybook -p 9000 -c .storybook"
+        "storybook": "start-storybook -p 9000 -c .storybook",
+        "storybook:deploy": "storybook-to-ghpages"
     }
 }

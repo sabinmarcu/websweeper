@@ -20,19 +20,33 @@ var _debug = _interopRequireDefault(require("debug"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 module.exports = function () {
   var TARGET = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'web';
   var root = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
+  console.log("Generating config for", TARGET, root);
   var ENV = process.env.RC_NODE_ENV || process.env.NODE_ENV || 'development';
-  var API_ENDPOINT = process.env.RC_API_ENDPOINT || process.env.API_ENDPOINT || null;
   var DEBUG = process.env.DEBUG || null;
+  var VARIABLES = {
+    'process': '(' + JSON.stringify({
+      env: _extends({}, Object.keys(process.env).filter(function (key) {
+        return key.startsWith('RC_');
+      }).reduce(function (prev, key) {
+        return _extends({}, prev, _defineProperty({}, key.replace('RC_', ''), process.env[key]));
+      }, {}), {
+        NODE_ENV: ENV,
+        DEBUG: DEBUG
+      })
+    }) + ')'
+  };
   var log = (0, _debug.default)("log:webpack:config:".concat(TARGET));
   log('ENV:', ENV);
   log('TARGET:', TARGET);
-  log('API ENDPOINT:', API_ENDPOINT);
   log('DEBUG LEVEL:', DEBUG);
+  log('VARIABLES', VARIABLES);
   var CSS_MAPS = (ENV !== 'production').toString();
 
   var OUTPUT_PATH = _path.default.resolve(root, 'dist');
@@ -95,7 +109,12 @@ module.exports = function () {
               sourceMap: CSS_MAPS
             }
           }, {
-            loader: 'postcss-loader'
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: _path.default.resolve(__dirname, '../postcss.config.js')
+              }
+            }
           }]
         })
       }, {
@@ -114,12 +133,7 @@ module.exports = function () {
     plugins: [new _webpack.default.NoEmitOnErrorsPlugin(), new _extractTextWebpackPlugin.default('style.css', {
       allChunks: true,
       disable: ENV !== 'production'
-    }), new _webpack.default.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(ENV),
-      'process.env.TARGET': JSON.stringify(TARGET),
-      'process.env.API_ENDPOINT': JSON.stringify(API_ENDPOINT),
-      'process.env.DEBUG': JSON.stringify(DEBUG)
-    }), new _copyWebpackPlugin.default([// { from: "./assets", to: "./assets" },
+    }), new _webpack.default.DefinePlugin(VARIABLES), new _copyWebpackPlugin.default([// { from: "./assets", to: "./assets" },
       // { from: "./manifest.json", to: "./" },
       // { from: "./favicon.ico", to: "./" },
       // { from: "./icon.png", to: "./" },
@@ -130,7 +144,8 @@ module.exports = function () {
       template: './index.ejs'
     }), new _webpack.default.NamedModulesPlugin()].concat(ENV === 'production' ? [new _webpack.default.LoaderOptionsPlugin({
       minimize: true
-    }), new _v8LazyParseWebpackPlugin.default(), new _webpack.default.optimize.UglifyJsPlugin({
+    }), // new V8LazyParseWebpackPlugin(),
+    new _webpack.default.optimize.UglifyJsPlugin({
       sourceMap: true,
       output: {
         comments: false
@@ -152,24 +167,6 @@ module.exports = function () {
           TARGET: TARGET
         }
       }
-    }), new _replaceBundleWebpackPlugin.default([{
-      pattern: /throw\s+(new\s+)?[a-zA-Z]+Error\s*\(/g,
-      replacement: function replacement() {
-        return 'return;(';
-      }
-    }]), new _offlinePlugin.default({
-      relativePaths: true,
-      AppCache: {
-        FALLBACK: {
-          '/': '/index.html'
-        }
-      },
-      ServiceWorker: {
-        events: true,
-        navigateFallbackURL: '/'
-      },
-      publicPath: '/',
-      externals: ['/']
     })] : [new _webpack.default.HotModuleReplacementPlugin(), new _webpack.default.NoEmitOnErrorsPlugin()]),
     stats: {
       colors: true
@@ -192,6 +189,11 @@ module.exports = function () {
       hot: true
     },
     watch: ENV === 'development',
-    target: ['electron', 'web'].includes(TARGET) ? TARGET : 'web'
+    watchOptions: {
+      ignored: /node_modules/,
+      aggregateTimeout: 300,
+      poll: 500
+    },
+    target: ['electron-main', 'web'].includes(TARGET) ? TARGET : 'web'
   };
 };

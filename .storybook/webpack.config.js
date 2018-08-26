@@ -6,6 +6,10 @@ module.exports = (storybookBaseConfig, configType) => {
   delete storybookBaseConfig.module.rules[0].query.plugins;
 
   storybookBaseConfig.module.rules[0].query.babelrc = true;
+  storybookBaseConfig.module.rules.push({
+    test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
+    use: 'url-loader',
+  })
 
   // Return the altered config
   return storybookBaseConfig;
