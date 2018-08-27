@@ -31,3 +31,4 @@ _gulp.default.task('babel:watch', function () {
 _gulp.default.task('default', ['babel']);
 
 _gulp.default.task('dev', ['babel', 'babel-watch']);
+//# sourceMappingURL=global.js.map

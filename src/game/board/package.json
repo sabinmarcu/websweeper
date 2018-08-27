@@ -1,6 +1,6 @@
 {
-  "name": "@websweeper/box",
-  "version": "1.0.2",
+  "name": "@websweeper/board",
+  "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
@@ -9,8 +9,8 @@
   "main": "lib/index.js",
   "module": "src/index.js",
   "scripts": {
-    "prepublish": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "gulp"
   },
   "author": "Sabin Marcu <sabinmarcu@gmail.com>",
   "license": "ISC",
@@ -18,8 +18,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "styled-components": "^3.4.5",
-    "@websweeper/gulp": "^1.0.0",
-    "@websweeper/themes": "^1.0.0"
+    "@websweeper/box": "^1.0.0",
+    "@websweeper/gulp": "^1.0.0"
   },
   "peerDependencies": {
     "chai": "^4.1.2",

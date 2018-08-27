@@ -25,3 +25,4 @@ var _default = function _default(bannerSignature) {
 };
 
 exports.default = _default;
+//# sourceMappingURL=banner.js.map

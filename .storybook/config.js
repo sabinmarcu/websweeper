@@ -3,7 +3,7 @@ import { withThemes } from 'storybook-styled-components';
 
 const loadStories = () => {
     const ctx = require.context('../src', true, /\.story\.jsx?$/);
-    const stories = ctx.keys();
+    const stories = ctx.keys().filter(path => path.indexOf('lib') >= 0);
     stories.forEach(story => ctx(story));
 }
 

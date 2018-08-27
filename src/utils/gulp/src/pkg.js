@@ -4,6 +4,7 @@ import gulp from 'gulp';
 import babel from 'gulp-babel';
 import sourcemaps from 'gulp-sourcemaps';
 import watch from 'gulp-watch';
+import copy from 'gulp-copy';
 import debug from 'gulp-debug';
 import index from 'index-js';
 import header from 'gulp-header';
@@ -25,48 +26,59 @@ const stylesGlob = 'src/**/*.{css,sss}';
 
 const babelGlob = [packagesGlob, `!${packagesTestsGlob}`];
 
+gulp.task('assets', () =>
+  gulp.src('src/assets/*')
+    .pipe(gulp.dest('lib/assets'))
+);
+
 gulp.task('index', () =>
-    gulp.src('src')
-        .pipe(index())
-        .pipe(debug({ title: 'Index Files' }))
-        .pipe(header(banner))
-        .pipe(gulp.dest('./')));
+  gulp.src('src')
+    .pipe(index())
+    .pipe(debug({ title: 'Index Files' }))
+    .pipe(header(banner))
+    .pipe(gulp.dest('./'))
+  );
 
 gulp.task('postcss', () =>
-    gulp.src(stylesGlob)
-        .pipe(debug({ title: 'PostCSS Files' }))
-        .pipe(postcss())
-        .pipe(gulp.dest('lib')));
+  gulp.src(stylesGlob)
+    .pipe(debug({ title: 'PostCSS Files' }))
+    .pipe(postcss())
+    .pipe(gulp.dest('lib'))
+);
 
 gulp.task('babel', () =>
-    gulp.src(babelGlob)
-        .pipe(debug({ title: 'Babel Files' }))
-        .pipe(sourcemaps.init())
-        .pipe(babel())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('lib')));
+  gulp.src(babelGlob)
+    .pipe(debug({ title: 'Babel Files' }))
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('lib'))
+  );
 
 gulp.task('default', (done: Function) => {
-    const tasks = ['babel'];
-    if (existsSync('./postcss.config.js')) {
-        tasks.unshift('postcss');
-    }
+  const tasks = ['babel'];
+  if (existsSync('./postcss.config.js')) {
+    tasks.unshift('postcss');
+  }
+  if (existsSync('./src/assets')) {
+    tasks.unshift('assets');
+  }
 
-    const files = ['./src/index.js', './src/index.jsx'];
-    const availableFiles = files.filter((it: string): boolean => existsSync(it));
-    const indexExists = availableFiles.length > 0;
-    if (!indexExists ||
-        (indexExists && availableFiles.filter(
-            (it: string): boolean => readFileSync(it, 'utf-8').startsWith(banner),
-        ).length > 0)
-    ) {
-        tasks.unshift('index');
-    }
+  const files = ['./src/index.js', './src/index.jsx'];
+  const availableFiles = files.filter((it: string): boolean => existsSync(it));
+  const indexExists = availableFiles.length > 0;
+  if (!indexExists ||
+    (indexExists && availableFiles.filter(
+      (it: string): boolean => readFileSync(it, 'utf-8').startsWith(banner),
+    ).length > 0)
+  ) {
+    tasks.unshift('index');
+  }
 
-    sequence(...tasks, () => done());
+  sequence(...tasks, () => done());
 });
 
 gulp.task('babel:watch', () =>
-    watch(babelGlob, () => gulp.run('default')));
+  watch(babelGlob, () => gulp.run('default')));
 
 gulp.task('dev', ['default', 'babel:watch']);

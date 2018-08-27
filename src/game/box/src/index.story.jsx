@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { ThemeProvider } from 'styled-components';
 import themes from '@websweeper/themes';
 import Box from './index';

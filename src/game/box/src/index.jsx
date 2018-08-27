@@ -20,7 +20,9 @@ const Box = styled.div`
   height: ${({ size }) => size || defaultSize}px;
   width: ${({ size }) => size || defaultSize}px;
   background: ${({ theme: { fg, states }, state }) =>
-    state && states && states[state] || fg || '#fff'};
+    state && !['flagged', 'bombed'].includes(state) && states && states[state] || fg || '#fff'};
+  color: ${({ theme: { fg, states }, state }) =>
+    state && ['flagged', 'bombed'].includes(state) && states && states[state] || fg || '#fff'};
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
   margin: ${({ margin }) => margin || 5}px;
   position: relative;
@@ -37,23 +39,12 @@ const symbolShapes = {
   'bombed': mine,
 }
 
-const symbolStyles = {
-  'default': '',
-  'revealed': '',
-  'flagged': `
-    color: white;
-  `,
-  'bombed': '',
-}
-
 const Symbol = styled.div`
   position: absolute;
   left: ${({ size }) => (size || defaultSize) * (100 - iconPercent) / 200}px;
   top: ${({ size }) => (size || defaultSize) * (100 - iconPercent) / 200}px;
   width: ${({ size }) => (size || defaultSize) * iconPercent / 100}px;
   height: ${({ size }) => (size || defaultSize) * iconPercent / 100}px;
-
-  ${({ state }) => symbolStyles[state]}
 `
 
 const withFetchIcon = (ComposedComponent: any): any =>
